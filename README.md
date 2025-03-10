@@ -7,80 +7,101 @@ Health Tracker
 https://github.com/user-attachments/assets/ea1c756c-f64c-4d78-b93b-3f9ca3a5e341
 
 
-1. Installing Dependencies
+# 🏥 Patient Health Care Monitor: AI-Driven Patient Journey & Risk Analytics Platform
+This repository contains the development notebooks for the Patient Health Care Monitor project, created for the ArangoDB Hackathon: **"Building the Next-Gen Agentic App with GraphRAG & NVIDIA cuGraph."**
 
-1.1 nx-arangodb – Library for working with ArangoDB and NetworkX (for graph-based machine learning).
-1.2 cugraph-cu12 – NVIDIA’s cuGraph library for GPU-accelerated graph algorithms.
-1.2 langchain, langgraph, langchain-community, langchain-openai, langchain-together – Libraries for creating LLM-based workflows and connecting to AI models (OpenAI, Together AI, etc.).
-1.3 langchain_groq – Integration with Groq, an AI model hosting service.
-1.4 nvidia-smi – Outputs information about the GPU (if available).
-1.5 nvcc --version – Outputs the installed CUDA version.
+## 🏆 Hackathon Submission
+This project is our submission for the ArangoDB Hackathon on Devpost, where we've created an agentic healthcare application integrating GraphRAG and GPU-accelerated graph analytics with NVIDIA cuGraph.
 
-2. Importing Required Libraries
+🔗 **Hackathon Link:** [Building the Next-Gen Agentic App with GraphRAG & NVIDIA cuGraph](https://arangodbhackathon.devpost.com/?_gl=1*125dmf4*_gcl_au*OTc3NTI1NzY3LjE3NDE0NTU4NjA.*_ga*MTI2NDQwNzc1OS4xNzQxNDU1ODYx*_ga_0YHJK3Y10M*MTc0MTYwNjQ5Ni40LjEuMTc0MTYwNjQ5OS4wLjAuMA..)
 
-2.1 json – Built-in Python module for parsing JSON files.
-2.2 networkx (nx) – Library for creating and analyzing graphs.
-2.3 plotly.graph_objects – Plotly module for visualizing graphs and other interactive plots.
+## 📊 Project Overview
+Patient Health Care Monitor is an AI-powered healthcare platform designed to monitor and analyze patient journeys and health risks using graph-based data models, AI reasoning, and GPU acceleration. The platform enables healthcare professionals to:
 
-3. Loading JSON Data
+✅ Visualize complete patient medical journeys  
+✅ Identify high-risk patients through graph analytics  
+✅ Discover treatment patterns and correlations  
+✅ Query medical data using natural language  
+✅ Analyze complex medical relationships with graph algorithms  
 
-3.1 diseases_35.json – Contains information about 35 diseases (likely a list of dictionaries).
-3.2 patients_550.json – Contains information about 550 patients.
-3.3 edges_corrected_100.json – Describes relationships between diseases and patients (likely as an edge list).
 
-4. Creating the Graph and Adding Nodes
+## 📓 Repository Contents
 
-4.1 nx.Graph() – Creates an undirected graph (for bidirectional relationships).
-4.2 add_node() – Adds nodes to the graph:
------id – Unique node identifier.
------label – Human-readable label (e.g., name).
------type – Type of node (disease or patient).
+1. **STEPS_Patient_Health_Care_Monitor.ipynb**  
+   This notebook develops the core platform in step-by-step progression:  
+   - **Step 0:** Package installation and environment setup  
+   - **Step 1:** Dataset preparation and initial analysis  
+   - **Step 2:** Converting and loading graph data into NetworkX with GPU acceleration  
+   - **Step 3:** Persisting the graph in ArangoDB  
+   - **Step 4:** Building the agentic application with LangChain & LangGraph  
+   - **Step 5:** Visualizing the data using Plotly 
 
-5. Adding Edges Between Nodes
+## 🛠️ Technologies Used
 
-5.1 add_edge() – Creates an edge (connection) between two nodes.
-5.2 relationship – Stores edge metadata (like type of interaction).
+| Technology | Purpose |
+|-----------|---------|
+| **ArangoDB** | Graph database for storing and querying medical data |
+| **NetworkX** | Python library for graph data structures and algorithms |
+| **NVIDIA cuGraph** | GPU-accelerated graph analytics |
+| **LangChain & LangGraph** | Framework for creating reasoning chains and agentic workflows |
+| **Groq AI** | AI model provider for LLM integration |
+| **Matplotlib** | Data visualization |
 
-6. Creating a Plotly Visualization
+## 🚀 Workflow Overview
+```text
+Step 0: Package installation and environment setup
+   │
+   ├── Step 1: Dataset preparation and initial analysis
+   │      │
+   │      ├── Load patient, disease, and relationship data
+   │      ├── Clean and structure the data
+   │      └── Handle missing values
+   │
+   ├── Step 2: Converting and loading graph data into NetworkX with GPU acceleration
+   │      │
+   │      ├── Create graph structure from data
+   │      └── Enable GPU acceleration with cuGraph
+   │
+   ├── Step 3: Persisting the graph in ArangoDB
+   │      │
+   │      ├── Store graph in ArangoDB
+   │      └── Optimize for querying
+   │
+   ├── Step 4: Building the agentic application with LangChain & LangGraph
+   │      │
+   │      ├── Create reasoning chains for medical analysis
+   │      └── Integrate LLM for natural language queries
+   │
+   └── Step 5: Visualizing the data using Plotly
+          │
+          ├── Generate interactive visualizations
+          └── Display patient journeys and medical insights
 
-6.1 edge_x, edge_y – Store x, y coordinates for edges.
-6.2 edge_trace – Defines the edge visualization.
-6.3 node_x, node_y, node_text – Store node properties (position, label).
-6.4 node_trace – Defines the node visualization.
-6.5 go.Figure() – Combines edge and node traces into a single plot.
-6.6 fig.show() – Renders the plot in a Jupyter Notebook or Python script.
 
-7. ArangoDB Integration
+## 📋 Prerequisites
+To run these notebooks, you'll need:
 
-7.1 ArangoClient – Establishes connection to the ArangoDB instance.
-7.2 client.db() – Connects to the _system database using provided credentials.
-7.3 Persist the NetworkX data to a graph within ArangoDB.
+✅ Python 3.8+  
+✅ NVIDIA GPU with CUDA support (for maximum performance)  
+✅ ArangoDB cloud instance or local installation  
+✅ API keys for Groq AI or other LLM provider  
 
-8.GROQ API Setup
 
-8.1 GROQ API key is stored in environment variables.
-8.2 Groq() initializes a connection to the GROQ model.
+## 🛠️ Installation
+Run the following commands to set up the environment:
 
-9.Tool 1 – Natural Language to AQL to Text
+```bash
+# Install nx-arangodb
+pip install nx-arangodb
 
-9.1 ChatGroq() – Initializes the LLM with qwen-2.5-32b model.
-9.2 ArangoGraphQAChain.from_llm() – Sets up LangChain to convert natural language to AQL.
-9.3 chain.invoke(query) – Executes the generated AQL query in ArangoDB.
-9.4 Returns the result in natural language.
+# Install nx-cugraph (if GPU available)
+pip install cugraph-cu12 --extra-index-url https://pypi.nvidia.com
 
-10.Tool 2 – Natural Language to AQL to NetworkX
+# Install LangChain & LangGraph
+pip install --upgrade langchain langchain-community langchain-openai langgraph 
 
-10.1 GROQ generates Python code using qwen-2.5-coder-32b model.
-10.2 The code is extracted using regex and executed using exec().
+# Install langchain_groq
+pip install langchain_groq
 
-11.Query Handler
-
-11.1 If the query mentions "visualize" or "show," it triggers the visualization tool.
-11.2 Otherwise, it triggers the text-based result tool.
-
-12.Execution Flow
-
-12.1  Executes a sample query.
-12.2 Outputs text result or generates a visualization.
 
 
